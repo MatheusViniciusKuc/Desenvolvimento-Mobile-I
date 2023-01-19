@@ -1,0 +1,11 @@
+.dialogMensagem {
+    background-color: gray;
+    border-radius: 15px;
+    width: auto;
+    text-align: center;
+}
+
+#dialogMsg {
+    font-size: larger;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
