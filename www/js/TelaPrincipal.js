@@ -84,7 +84,7 @@ function criarVeiculo(placa, usuario) {
         "horario_server": new Date(),
         "entrada": new Date(),
         "placa": placa,
-        "saida": null,
+        "saida": false,
         "valor": null,
         "user": usuario,
         "horas": 3
@@ -95,7 +95,7 @@ function criarVeiculo(placa, usuario) {
 function registrarEntrada(placa, usuario) {
     let notExist = true
     veiculos.forEach(v => {
-        if (placa === v.placa && v.saida === null) {
+        if (placa === v.placa && v.saida === false) {
             notExist = false
         }
     })
@@ -112,7 +112,7 @@ function prePagamento(placa) {
     let exist = false
     let veiculo
     veiculos.forEach(v => {
-        if (placa === v.placa) {
+        if (placa === v.placa && v.saida === false) {
             exist = true
             veiculo = v
         }
@@ -126,7 +126,7 @@ function prePagamento(placa) {
 function registrarPagamento(placa, valor) {
     let veiculo
     veiculos.forEach(v => {
-        if (placa === v.placa) {
+        if (placa === v.placa && v.saida === false) {
             veiculo = v
         }
     }) 

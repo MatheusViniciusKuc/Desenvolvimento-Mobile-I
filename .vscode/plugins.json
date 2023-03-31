@@ -1,1 +1,1 @@
-{"plugins":["cordova-plugin-statusbar","cordova-plugin-camera"]}
+{"plugins":["cordova-plugin-whitelist"]}
