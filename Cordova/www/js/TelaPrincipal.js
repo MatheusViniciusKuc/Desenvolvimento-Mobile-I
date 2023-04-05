@@ -10,8 +10,19 @@ function enviar() {
         return
     }
 
-    const resp = registrarEntrada(placa_informada, usuario)
-    dialog(resp)
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var cliente = JSON.parse(this.responseText);
+            console.log(cliente)
+        }
+    }
+
+    xmlhttp.open("GET", "https://hernanicruz.com/aulas/estacionamento/registrarEntradaGet.php?placa=" + placa_informada + "&user=TESTE", false);
+    xmlhttp.send();
+
+    // const resp = registrarEntrada(placa_informada, usuario)
+    // dialog(resp)
 
     document.getElementById("num_placa").value = "";
 }
@@ -54,7 +65,7 @@ function pagamento() {
 
     if (placa_informada === placaConsultar) {
         const resp = registrarPagamento(placa_informada, valorTotal)
-        
+
         dialog(resp)
     } else {
         dialog("A placa " + placa_informada + " informada é diferente da placa " + placaConsultar + " consultada! Consulte essa placa antes de fazer o pagamento.");
@@ -129,7 +140,7 @@ function registrarPagamento(placa, valor) {
         if (placa === v.placa && v.saida === false) {
             veiculo = v
         }
-    }) 
+    })
     veiculo.saida = true
     veiculo.valor = valor
 
