@@ -10,8 +10,19 @@ function enviar() {
         return
     }
 
-    const resp = registrarEntrada(placa_informada, usuario)
-    dialog(resp)
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var cliente = JSON.parse(this.responseText);
+            console.log(cliente)
+        }
+    }
+
+    xmlhttp.open("GET", "https://hernanicruz.com/aulas/estacionamento/registrarEntradaGet.php?placa=" + placa_informada + "&user=TESTE", false);
+    xmlhttp.send();
+
+    // const resp = registrarEntrada(placa_informada, usuario)
+    // dialog(resp)
 
     document.getElementById("num_placa").value = "";
 }
