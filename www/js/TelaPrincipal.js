@@ -1,7 +1,8 @@
 let id = 0
 let valorTotal = 0
 let placaConsultar = ''
-const usuario = 'Matheus Kuc' // Simula um login
+const urlBase = 'https://hernanicruz.com/aulas/estacionamento/'
+const usuario = 'Matheus Vinicius Kuc' // Simula um login
 
 function enviar() {
     const placa_informada = document.getElementById("num_placa").value
@@ -29,7 +30,7 @@ function enviar() {
         }
     }
 
-    xmlhttp.open("GET", "https://hernanicruz.com/aulas/estacionamento/registrarEntradaGet.php?placa=" + placa_informada + "&user=" + usuario, true);
+    xmlhttp.open("GET", urlBase + "registrarEntradaGet.php?placa=" + placa_informada + "&user=" + usuario, true);
     xmlhttp.send();
 
     document.getElementById("num_placa").value = "";
@@ -61,7 +62,7 @@ function consultar() {
         }
     }
 
-    xmlhttp.open("GET", "https://hernanicruz.com/aulas/estacionamento/prePagamentoGet.php?placa=" + placa_informada, true);
+    xmlhttp.open("GET", urlBase + "prePagamentoGet.php?placa=" + placa_informada, true);
     xmlhttp.send();
     document.getElementById("buttonPagamento").disabled = false;
 }
@@ -87,7 +88,7 @@ function pagamento() {
             }
         }
 
-        xmlhttp.open("GET", "https://hernanicruz.com/aulas/estacionamento/registrarPagamentoGet.php?id=" + id + "&valor=" + valorTotal, true);
+        xmlhttp.open("GET", urlBase + "registrarPagamentoGet.php?id=" + id + "&valor=" + valorTotal, true);
         xmlhttp.send();
     } else {
         dialog("A placa " + placa_informada + " informada é diferente da placa " + placaConsultar + " consultada! Consulte essa placa antes de fazer o pagamento.");
@@ -121,7 +122,9 @@ function mensagemConsulta(entrada, valorHora, placa) {
     const dataEntradaFormatada = dataEmFormatoBr(dataEntrada)
     const dataAtualFormatada = dataEmFormatoBr(dataAtual)
 
-    return "O veículo com placa " + placa + " ficou por " + horas + " horas e " + minutos + " minutos. Valor por hora de R$" + valorHora + ",00. Total do estacionamento ficou em R$" + valorTotal + ",00. Ficou da data " + dataEntradaFormatada + " até " + dataAtualFormatada + "."
+    return "O veículo com placa " + placa + " ficou por " + horas + " horas e " + minutos + 
+        " minutos. Valor por hora de R$" + valorHora + ",00. Total do estacionamento ficou em R$" + valorTotal + ",00. Ficou da data " 
+        + dataEntradaFormatada + " até " + dataAtualFormatada + "."
 }
 
 function verifarMinutos(milisegundos) {
